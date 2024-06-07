@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Midas</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: yellow; 
+        }
+
+        .transparent-div {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .gif {
+            width: auto;
+            height: 100%;
+			display: flex;
+            justify-content: center;
+            align-items: center;
+
+            
+            display: none; /* Initially hidden */
+        }
+
+        .gif.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="transparentDiv" class="transparent-div">
+        <img id="notTalkingGif" class="gif" src="gifs/nontalking.gif" alt="Not Talking">
+        <img id="talkingGif" class="gif" src="gifs/talking.gif" alt="Talking">
+       
+    </div>
+    <audio id="audioPlayer" hidden></audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const notTalkingGif = document.getElementById('notTalkingGif');
+            const talkingGif = document.getElementById('talkingGif');
+            const transparentDiv = document.getElementById('transparentDiv');
+            let alwaysOnTop = false;
+
+const wavFiles = [
+                'wavs/any1else.wav',
+                'wavs/cancer.wav',
+                'wavs/cannibal.wav',
+                'wavs/choke.wav',
+                'wavs/crazy.wav',
+                'wavs/creamable.wav',
+                'wavs/deeznuts.wav',
+                'wavs/dolphins.wav',
+                'wavs/dream.wav',
+                'wavs/funnynumbers.wav',
+                'wavs/gamesbutnogames.wav',
+                'wavs/idkman.wav',
+                'wavs/interesting.wav',
+                'wavs/jesus.wav',
+                'wavs/lonely.wav',
+                'wavs/meth.wav',
+                'wavs/monster.wav',
+                
+                'wavs/mutilate.wav',
+                'wavs/nerds.wav',
+                'wavs/nicotinecage.wav',
+                'wavs/notaste.wav',
+                'wavs/notcute.wav',
+                'wavs/notstreamer.wav',
+                'wavs/onyo.wav',
+                
+                'wavs/pcketcamp.wav',
+                'wavs/prolapse.wav',
+                'wavs/rabbits.wav',
+                
+                
+                'wavs/thosegames.wav',
+                'wavs/twitter.wav',
+                'wavs/wedding.wav'
+            ];
+
+
+            
+
+            function playRandomWav() {
+                if (wavFiles.length === 0) return;
+                const randomWav = wavFiles[Math.floor(Math.random() * wavFiles.length)];
+                audioPlayer.src = randomWav;
+                audioPlayer.play();
+                showTalkingGif();
+            }
+
+            function showTalkingGif() {
+                talkingGif.classList.add('show');
+                notTalkingGif.classList.remove('show');
+                audioPlayer.onended = function() {
+                    talkingGif.classList.remove('show');
+                    notTalkingGif.classList.add('show');
+                };
+            }
+
+            // Initial state
+            notTalkingGif.classList.add('show');
+
+            transparentDiv.addEventListener('click', () => {
+                playRandomWav();
+            });
+
+            startRandomPlay();
+        });
+    </script>
+</body>
+</html>
